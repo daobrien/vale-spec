@@ -21,4 +21,4 @@ You can either build the RPM or download the RPM from the [COPR repository](http
 For issues with packaging, feel free to create an [issue](https://github.com/obriend/vale-spec/issues).
 For issues with core Vale functionality, go to [vale](https://github.com/errata-ai/vale/issues).
 
-If you are unsure, feel free to create an issue here and I will redirect your issue if necessary.
+If you are unsure, create an issue here and I will redirect your issue if necessary.
