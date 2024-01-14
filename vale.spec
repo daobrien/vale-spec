@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.0.3
+Version:       3.0.4
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose
 License:       MIT
