@@ -14,11 +14,11 @@ dnf install vale
 ```
 
 On other systems, download and install the RPM manually.
-You can either build the RPM, or download the RPM from the [COPR repository](https://copr.fedorainfracloud.org/coprs/mczernek/vale/).
+You can either build the RPM or download the RPM from the [COPR repository](https://copr.fedorainfracloud.org/coprs/mczernek/vale/).
 
 ## Filing Bugs
 
 For issues with packaging, feel free to create an [issue](https://github.com/obriend/vale-spec/issues).
-For other issues, [vale](https://github.com/errata-ai/vale/issues) is the proper place.
+For issues with core Vale functionality, go to [vale](https://github.com/errata-ai/vale/issues).
 
-If you are unsure, feel free to create an issue here and I will redirect your issue if necessary.
+If you are unsure, create an issue here.
