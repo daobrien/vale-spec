@@ -1,6 +1,6 @@
 # Vale
 
-This repository is a community maintained SPEC file for the 
+This repository maintains a SPEC file for the 
 [vale](https://github.com/errata-ai/vale) command-line tool.
 
 ## Installing Vale
