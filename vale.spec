@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.7.0
+Version:       3.7.1
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose
 License:       MIT
@@ -35,6 +35,7 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Mon Aug 26 2024 - daobrien@redhat.com - 3.7.1-1
 * Fri Jul 15 2022 - mczernek@redhat.com - 2.20.0-1
 - Modify RPM specfile to prepare for Fedora packages submission
 * Fri May 13 2022 Initial build
