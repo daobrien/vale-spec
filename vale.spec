@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.7.1
+Version:       3.9.1
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose
 License:       MIT
@@ -15,7 +15,7 @@ Vale is a CLI linter for collaborative writing.
 Vale enables you to parse a variety of
 markup-formatted files, such as Markdown,
 AsciiDoc, reStructuredText, HTML, or XML,
-and impose proper spelling or style guide.
+and impose preferred spelling or a style guide.
 
 %prep
 %setup -qc
@@ -35,6 +35,7 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Mon Nov 18 2024 - daobrien@redhat.com - 3.9.1-1
 * Mon Aug 26 2024 - daobrien@redhat.com - 3.7.1-1
 * Fri Jul 15 2022 - mczernek@redhat.com - 2.20.0-1
 - Modify RPM specfile to prepare for Fedora packages submission
