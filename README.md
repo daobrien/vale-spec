@@ -9,8 +9,8 @@ On Fedora and CentOS, you can enable the `mczernek/vale` COPR repository and ins
 
 
 ```
-dnf copr enable mczernek/vale
-dnf install vale
+[user@host ~] $ sudo dnf copr enable mczernek/vale
+[user@host ~] $ sudo dnf install vale
 ```
 
 On other systems, download and install the RPM manually.
