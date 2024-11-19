@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:          vale
 Version:       3.9.1
 Release:       1%{?dist}
