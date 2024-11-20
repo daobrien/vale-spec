@@ -17,6 +17,9 @@ markup-formatted files, such as Markdown,
 AsciiDoc, reStructuredText, HTML, or XML,
 and impose preferred spelling or a style guide.
 
+# Disable generation of debuginfo package
+%global debug_package %{nil}
+
 %prep
 %setup -qc
 
