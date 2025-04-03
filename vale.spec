@@ -1,6 +1,6 @@
 Name:          vale
-Version:       3.9.6
-Release:       2%{?dist}
+Version:       3.11.0
+Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose.
 License:       MIT
 URL:           https://github.com/errata-ai/vale
@@ -38,6 +38,7 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Thu Apr 03 2025 - daobrien@redhat.com - 3.11.0-1
 * Wed Mar 05 2025 - daobrien@redhat.com - 3.9.6-2
 * Wed Mar 05 2025 - daobrien@redhat.com - 3.9.6-1
 * Mon Feb 10 2025 - daobrien@redhat.com - 3.9.5-1
