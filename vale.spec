@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.13.1
+Version:       3.14.0
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose.
 License:       MIT
@@ -38,6 +38,7 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Fri Mar 13 2026 - daobrien@redhat.com - 3.14.0-1
 * Mon Feb 09 2026 - daobrien@redhat.com - 3.13.1-1
 * Mon Oct 27 2025 - daobrien@redhat.com - 3.13.0-1
 * Fri Jul 04 2025 - daobrien@redhat.com - 3.12.0-1
