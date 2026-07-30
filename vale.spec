@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.15.2
+Version:       3.16.0
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose.
 License:       MIT
@@ -38,6 +38,8 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Thu Jul 30 2026 - daobrien@redhat.com - 3.16.0-1
+- Major update to prose, Vale's underlying NLP library, bringing significant performance improvements
 * Mon Jul 27 2026 - daobrien@redhat.com - 3.15.2-1
 * Mon Jun 15 2026 - daobrien@redhat.com - 3.15.1-1
 * Mon May 18 2026 - daobrien@redhat.com - 3.14.1-2
