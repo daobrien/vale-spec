@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.16.0
+Version:       3.18.0
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose.
 License:       MIT
@@ -38,6 +38,11 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Tue Aug 25 2026 - daobrien@redhat.com - 3.18.0-1
+- v3.18.0 is the largest expansion of Vale's format support since v3.0.0.
+- MDX is now parsed natively — mdx2vast is no longer required. 
+- This release also adds support for four new markup formats: Typst, Quarto, MyST, and QDoc.
+- R Markdown now works out of the box, and comment extraction now covers Lua, PHP, Haskell, R, Perl, and SCSS.
 * Thu Jul 30 2026 - daobrien@redhat.com - 3.16.0-1
 - Major update to prose, Vale's underlying NLP library, bringing significant performance improvements
 * Mon Jul 27 2026 - daobrien@redhat.com - 3.15.2-1
