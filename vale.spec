@@ -1,14 +1,22 @@
 Name:          vale
 Version:       3.19.0
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       A syntax-aware, command-line linter for prose.
 License:       MIT
 URL:           https://github.com/errata-ai/vale
 Source0:       https://github.com/errata-ai/%{name}/releases/download/v%{version}/%{name}_%{version}_Linux_64-bit.tar.gz
 
+# Restrict to x86_64 since Source0 is a pre-compiled x86_64 binary
+ExclusiveArch: x86_64
+
 # Workaround for Golang missing build IDs
+# Workaround for pre-compiled Go binaries lacking build IDs on EL10/Fedora
 # https://github.com/tpokorra/lbs-mono-fedora/issues/3#issuecomment-219857688
 %undefine _missing_build_ids_terminate_build
+%global _build_id_links none
+%global debug_package %{nil}
+%global __strip /bin/true
+
 
 %description
 Vale is a CLI linter for collaborative writing.
@@ -38,6 +46,8 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Wed Sep 02 2026 - daobrien@redhat.com - 3.19.0-4
+- Update spec to account for DNF changes in EPEL 10
 * Wed Sep 02 2026 - daobrien@redhat.com - 3.19.0-2
 - Rebuild for epel 10 not using dnf4
 * Wed Sep 02 2026 - daobrien@redhat.com - 3.19.0-1
