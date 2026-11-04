@@ -1,5 +1,5 @@
 Name:          vale
-Version:       3.25.1
+Version:       3.26.0
 Release:       1%{?dist}
 Summary:       A syntax-aware, command-line linter for prose.
 License:       MIT
@@ -46,6 +46,8 @@ chmod -x LICENSE README.md
 %{_bindir}/%{name}
 
 %changelog
+* Wed Nov 04 2026 - daobrien@redhat.com - 3.26.0-1
+- v3.26.0 is the first release that ships Vale as a WebAssembly module. It's the same engine as the CLI, built for a JavaScript host: a browser, a browser extension, or Node. It runs with no server and no filesystem.
 * Thu Oct 29 2026 - daobrien@redhat.com - 3.25.1-1
 * Wed Oct 07 2026 - daobrien@redhat.com - 3.24.0-1
 * Tue Sep 29 2026 - daobrien@redhat.com - 3.23.0-1
