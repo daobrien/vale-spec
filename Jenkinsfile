@@ -42,7 +42,7 @@ pipeline {
     }
 
     environment {
-        NEXUS_URL  = "https://nexus-gls-common.apps.tools-na.prod.nextcle.com/"
+        NEXUS_URL  = "https://nexus-gls-common.apps.tools-na.prod.nextcle.com"
         NEXUS_REPO = 'curriculum-repos'
     }
 
