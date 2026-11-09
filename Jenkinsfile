@@ -1,4 +1,4 @@
-// Build the vale RPM in mock for every chroot listed below, then push the
+// Build the vale RPM in mock for every chroot listed below (in parallel), then push the
 // resulting SRPM and x86_64 RPM to the Nexus yum repository.
 //
 // Agent requirements: mock, rpmdevtools (spectool) and curl installed, and the
@@ -17,7 +17,6 @@ def CHROOTS = [
     'rhel-10-x86_64'          : ['rhel', '10'],
     'centos-stream-9-x86_64'  : ['centos', '9'],
     'centos-stream-10-x86_64' : ['centos', '10'],
-    'fedora-42-x86_64'        : ['fedora', '42'],
     'fedora-43-x86_64'        : ['fedora', '43'],
     'fedora-44-x86_64'        : ['fedora', '44'],
     'fedora-45-x86_64'        : ['fedora', '45'],
@@ -78,11 +77,17 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    for (chroot in CHROOTS.keySet()) {
-                        stage(chroot) {
+                    // One parallel branch per chroot. Mock keeps a separate root,
+                    // cache and lock under /var/lib/mock/<chroot>, so distinct
+                    // chroots are safe to build concurrently on one host.
+                    def builds = [:]
+                    for (c in CHROOTS.keySet()) {
+                        def chroot = c   // fresh binding per closure
+                        builds[chroot] = {
                             sh "mock -r ${chroot} --spec ${SPEC} --sources ${SOURCES} --resultdir ${OUT}/${chroot}"
                         }
                     }
+                    parallel builds
                 }
             }
         }
