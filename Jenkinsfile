@@ -10,6 +10,9 @@
 //
 // RPMs already present in Nexus are skipped rather than re-uploaded, so
 // re-running the pipeline for a published version is safe.
+//
+// Each build uses its own mock build roots (--uniqueext), so builds of
+// different branches, or from different Jenkins jobs, can run at the same time.
 
 // mock chroot -> [platform, repo_name] path segments under the Nexus repo.
 def CHROOTS = [
@@ -80,11 +83,19 @@ pipeline {
                     // One parallel branch per chroot. Mock keeps a separate root,
                     // cache and lock under /var/lib/mock/<chroot>, so distinct
                     // chroots are safe to build concurrently on one host.
+                    //
+                    // --uniqueext gives every Jenkins build its own copy of each
+                    // chroot (/var/lib/mock/<chroot>-<ext>), so a branch build and
+                    // a main build, or two jobs watching this repo, never contend
+                    // for the same build root ("Build root is locked by another
+                    // process", exit 60). The root cache is still shared, and mock
+                    // removes the chroot when the build finishes.
+                    def uniqueext = env.BUILD_TAG.replaceAll(/[^A-Za-z0-9_.-]/, '_')
                     def builds = [:]
                     for (c in CHROOTS.keySet()) {
                         def chroot = c   // fresh binding per closure
                         builds[chroot] = {
-                            sh "mock -r ${chroot} --spec ${SPEC} --sources ${SOURCES} --resultdir ${OUT}/${chroot}"
+                            sh "mock -r ${chroot} --uniqueext ${uniqueext} --spec ${SPEC} --sources ${SOURCES} --resultdir ${OUT}/${chroot}"
                         }
                     }
                     parallel builds
