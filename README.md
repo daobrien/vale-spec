@@ -24,22 +24,6 @@ Once the repository is configured:
 [user@host ~] $ sudo dnf install vale
 ```
 
-### From COPR
-
-The upstream maintainer publishes builds of this spec to the `mczernek/vale`
-COPR repository, which works on Fedora and CentOS without any Red Hat Training
-access:
-
-```
-[user@host ~] $ sudo dnf copr enable mczernek/vale
-[user@host ~] $ sudo dnf install vale
-```
-
-COPR builds track the upstream repository, not this fork, so versions may lag.
-Prebuilt RPMs are also available from the
-[COPR repository](https://copr.fedorainfracloud.org/coprs/mczernek/vale/) for
-manual download.
-
 ### Building the RPM yourself
 
 With `mock` and `rpmdevtools` installed, fetch the source tarball and build for
