@@ -17,7 +17,6 @@ def CHROOTS = [
     'rhel-10-x86_64'          : ['rhel', '10'],
     'centos-stream-9-x86_64'  : ['centos', '9'],
     'centos-stream-10-x86_64' : ['centos', '10'],
-    'fedora-42-x86_64'        : ['fedora', '42'],
     'fedora-43-x86_64'        : ['fedora', '43'],
     'fedora-44-x86_64'        : ['fedora', '44'],
     'fedora-45-x86_64'        : ['fedora', '45'],
