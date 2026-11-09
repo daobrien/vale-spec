@@ -3,14 +3,24 @@
 //
 // Agent requirements: mock, rpmdevtools (spectool) and curl installed, and the
 // Jenkins user in the "mock" group. The rhel-* chroots need the host registered
-// with subscription-manager; swap in centos-stream-N-x86_64 or alma-N-x86_64 if
-// that is not an option.
+// with subscription-manager; the centos-stream-* and fedora-* chroots do not.
+// Every chroot needs a matching /etc/mock/<chroot>.cfg from mock-core-configs
+// and its signing key from distribution-gpg-keys. Fedora releases past EOL are
+// moved to /etc/mock/eol/ by mock-core-configs; drop them from CHROOTS then.
+//
+// RPMs already present in Nexus are skipped rather than re-uploaded, so
+// re-running the pipeline for a published version is safe.
 
 // mock chroot -> [platform, repo_name] path segments under the Nexus repo.
 def CHROOTS = [
-    'rhel-9-x86_64'   : ['rhel', '9'],
-    'rhel-10-x86_64'  : ['rhel', '10'],
-    'fedora-44-x86_64': ['fedora', '44'],
+    'rhel-9-x86_64'           : ['rhel', '9'],
+    'rhel-10-x86_64'          : ['rhel', '10'],
+    'centos-stream-9-x86_64'  : ['centos', '9'],
+    'centos-stream-10-x86_64' : ['centos', '10'],
+    'fedora-42-x86_64'        : ['fedora', '42'],
+    'fedora-43-x86_64'        : ['fedora', '43'],
+    'fedora-44-x86_64'        : ['fedora', '44'],
+    'fedora-45-x86_64'        : ['fedora', '45'],
 ]
 
 def SPEC    = 'vale.spec'
@@ -27,7 +37,18 @@ def rpm_upload_curl(rpm_file, platform, repo_name) {
         withEnv(["RPM_PATH=${rpm_file.path}", "TARGET_URL=${target}"]) {
             // Single-quoted on purpose: the shell expands the variables, so the
             // password never lands in the Groovy string or the console log.
-            sh 'curl --fail --silent --show-error --user "$NEXUS_USER:$NEXUS_PASSWORD" --upload-file "$RPM_PATH" "$TARGET_URL"'
+            //
+            // Nexus rejects re-uploads of an existing asset (deployment policy
+            // "disable redeploy"), so skip anything that is already published.
+            // Rebuilding a version that is already in the repo is a no-op, not
+            // a failure; bump the Release in the spec to publish a new build.
+            sh '''
+                if curl --fail --silent --head --output /dev/null --user "$NEXUS_USER:$NEXUS_PASSWORD" "$TARGET_URL"; then
+                    echo "Already published, skipping: $TARGET_URL"
+                else
+                    curl --fail --silent --show-error --user "$NEXUS_USER:$NEXUS_PASSWORD" --upload-file "$RPM_PATH" "$TARGET_URL"
+                fi
+            '''
         }
     }
 }
